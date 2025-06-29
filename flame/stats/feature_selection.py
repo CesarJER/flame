@@ -85,7 +85,7 @@ def run_feature_selection(X, Y, method, num_features, quantitative):
         function = f_regression
 
     try:
-        kbest = SelectKBest(function, n_features)
+        kbest = SelectKBest(score_func=function, k=n_features)
         kbest.fit(X,Y)
         variable_mask = kbest.get_support()
     except Exception as e:
