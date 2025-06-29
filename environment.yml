@@ -2,16 +2,16 @@ name: flame
 channels:
   - default
   - rdkit
-  - conda-forge 
+  - conda-forge
   - chembl
 dependencies:
   - pip
-  - python=3.6
-  - setuptools=>38.4.0
-  - scikit-learn=0.24.1
-  - imbalanced-learn=>0.8.0
+  - python
+  - setuptools
+  - scikit-learn
+  - imbalanced-learn
   - requests
-  - rdkit=2020.09.1.0
+  - rdkit
   - pyyaml
   - pytest
   - psycopg2
@@ -20,12 +20,11 @@ dependencies:
   - openpyxl
   - appdirs
   - pip:
-     - xgboost==1.4.2
-     - django==2.2.8
-     - djangorestframework
-     - django-cors-headers
-     - djangorestframework-yaml
-     - python-keycloak
-     - "https://github.com/phi-grib/standardiser/archive/master.zip"
-     - "https://github.com/phi-grib/nonconformist/archive/master.zip"
-
+    - xgboost==1.4.2
+    - django==2.2.8
+    - djangorestframework
+    - django-cors-headers
+    - djangorestframework-yaml
+    - python-keycloak
+    - "https://github.com/phi-grib/standardiser/archive/master.zip"
+    - "https://github.com/phi-grib/nonconformist/archive/master.zip"
