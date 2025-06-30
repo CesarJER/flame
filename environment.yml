@@ -8,7 +8,7 @@ dependencies:
   - pip
   - python
   - setuptools
-  - scikit-learn
+  - scikit-learn=1.5.2
   - imbalanced-learn
   - requests
   - rdkit
