@@ -159,10 +159,10 @@ def action_publish(model):
     try:
         shutil.copytree(src_path, new_path)
     except:
-        return False, (f'Unable to copy contents of dev version for model {model}',max_version+1)
+        return False, f'Unable to copy contents of dev version for model {model}'
 
     LOG.info(f'New model version created from {src_path} to {new_path}')
-    return True, f'New model version created from {src_path} to {new_path}'
+    return True, (f'New model version created from {src_path} to {new_path}',max_version+1)
 
 
 def action_remove(model, version):
