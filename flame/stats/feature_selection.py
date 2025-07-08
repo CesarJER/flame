@@ -3,6 +3,7 @@
 # Description    Flame feature selection methods
 ##
 # Authors:       Manuel Pastor (manuel.pastor@upf.edu)
+# Contributors:  César Jessé Enríquez Rodríguez (cesarjesse.enriquez01@alumni.upf.edu) [July 2025]
 ##
 # Copyright 2018 Manuel Pastor
 ##
@@ -25,11 +26,7 @@
 
 # from sklearn.preprocessing import MinMaxScaler 
 # from sklearn.feature_selection import chi2
-from sklearn.feature_selection import  SelectKBest
-from sklearn.feature_selection import f_classif
-from sklearn.feature_selection import f_regression
 # from flame.util import get_logger
-import numpy as np
 from sklearn.feature_selection import RFE, SelectKBest, f_classif, f_regression
 from sklearn.linear_model import LogisticRegression, LinearRegression
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
