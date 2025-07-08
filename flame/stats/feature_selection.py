@@ -65,7 +65,7 @@ def run_feature_selection(X, Y, method, num_features, quantitative):
 
     # --- Determine number of features ---
     # When auto, the 10% top informative variables are retained.
-    if num_features in [None, '']:
+    if num_features is None or num_features == '':
         num_features = 'auto'
 
     if num_features == "auto":
