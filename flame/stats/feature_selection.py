@@ -61,14 +61,12 @@ def run_feature_selection(X, Y, method, num_features, quantitative):
         arr = np.array(method)
         if arr.shape[0] == nvarx:
             if arr.dtype in [np.bool_, bool, np.int_, int, np.uint8]:
-                if np.max(arr)==1 & np.min(arr)==0: #boolean
-                    variable_mask = arr.astype(bool)
-                    return True, variable_mask
-                elif np.max(arr)==nvarx: #sorted vector
+                if np.max(arr)==nvarx: #sorted vector
                     sort_list = True
                     variable_mask = arr.astype(int)
-                else:
-                    return False, ValueError("Invalid mask input: list/array maximum != number of variables")
+                else: #boolean
+                    variable_mask = arr.astype(bool)
+                    return True, variable_mask
             else:
                 return False, ValueError("Invalid mask input: list/array must contain 0/1 or bool or int (sorting values 1-n_features)")
         else:
