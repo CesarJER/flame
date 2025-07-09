@@ -37,8 +37,9 @@ def run_feature_selection(X, Y, method, num_features, quantitative):
     Feature selection supporting:
     - SelectKBest (f_classif, f_regression)
     - RFE (rfe_log, rfe_rf)
-    - Direct mask input (0/1 or boolean array)
-
+    - Direct mask input (0/1 or boolean array or  of int array (sorting values 1-n_features))
+    - Sorted
+    
     Parameters:
     - X: numpy array [n_samples, n_features]
     - Y: numpy array [n_samples]
@@ -100,6 +101,10 @@ def run_feature_selection(X, Y, method, num_features, quantitative):
             n_features = nvarx
 
     # --- Manual sorted selection ---
+    if method.lower() == "sorted":
+        sort_list=True
+        variable_mask = np.arange(1, nvarx + 1)
+
     if sort_list:
         variable_mask = (variable_mask>0)&(variable_mask<=n_features)
         return True, variable_mask
