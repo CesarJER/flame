@@ -42,7 +42,7 @@ def run_feature_selection(X, Y, method, num_features, quantitative):
     Parameters:
     - X: numpy array [n_samples, n_features]
     - Y: numpy array [n_samples]
-    - method: str or array/list of 0/1 or booleans
+    - method: str or array/list of 0/1 or booleans or array/list of int (sorting values 1-n_features)
     - num_features: int or "auto"
     - quantitative: bool
 
@@ -53,15 +53,25 @@ def run_feature_selection(X, Y, method, num_features, quantitative):
 
     nobj, nvarx = np.shape(X)
     variable_mask = np.zeros(nvarx, dtype=bool)
+    sort_list = False
 
     # --- Direct mask input (0/1 or bool) ---
     if isinstance(method, (list, np.ndarray)):
         arr = np.array(method)
-        if arr.dtype in [np.bool_, bool, np.int_, int, np.uint8] and arr.shape[0] == nvarx:
-            variable_mask = arr.astype(bool)
-            return True, variable_mask
+        if arr.shape[0] == nvarx:
+            if arr.dtype in [np.bool_, bool, np.int_, int, np.uint8]:
+                if np.max(arr)==1 & np.min(arr)==0: #boolean
+                    variable_mask = arr.astype(bool)
+                    return True, variable_mask
+                elif np.max(arr)==nvarx: #sorted vector
+                    sort_list = True
+                    variable_mask = arr.astype(int)
+                else:
+                    return False, ValueError("Invalid mask input: list/array maximum != number of variables")
+            else:
+                return False, ValueError("Invalid mask input: list/array must contain 0/1 or bool or int (sorting values 1-n_features)")
         else:
-            return False, ValueError("Invalid mask input: must be list/array of 0/1 or bool, length = number of variables")
+            return False, ValueError("Invalid mask input: length != number of variables")
 
     # --- Determine number of features ---
     # When auto, the 10% top informative variables are retained.
@@ -89,6 +99,11 @@ def run_feature_selection(X, Y, method, num_features, quantitative):
         if n_features > nvarx or n_features < 1:
             n_features = nvarx
 
+    # --- Manual sorted selection ---
+    if sort_list:
+        variable_mask = (variable_mask>0)&(variable_mask<=n_features)
+        return True, variable_mask
+    
     # --- RFE Selection ---
     if method.lower() in ["rfe_log", "rfe_rf"]:
         try:
