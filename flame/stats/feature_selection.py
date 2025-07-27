@@ -79,7 +79,7 @@ def run_feature_selection(X, Y, method, num_features, quantitative):
 
     if num_features == "auto":
         # Optimised: Use 10% of the total number of objects, with a minimum of 10, but without exceeding the available variables.
-        n_features = min(max(int(n_obj * 0.1), 10), nvarx)
+        n_features = min(max(int(nobj * 0.1), 10), nvarx)
     else:
         try:
             n_features = int(num_features)
